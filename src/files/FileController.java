@@ -11,18 +11,18 @@ public class FileController {
     /**
      * Objeto para el acceso aleatorio al archivo
      */
-    RandomAccessFile randomAccessFile;
+    protected RandomAccessFile randomAccessFile;
 
     /**
      * Longitud del registro
      */
-    int registerLength;
+    protected int registerLength;
 
     /**
      * Constructor por defecto
      * @param fileName : Nombre del archivo en la estructura de archivos
      */
-    FileController(String fileName) {
+    protected FileController(String fileName) {
         try {
             randomAccessFile = new RandomAccessFile(fileName,"rw");
             randomAccessFile.setLength(0);
@@ -49,7 +49,7 @@ public class FileController {
      * @param position : posición del registro que se desea eliminar
      * @throws IOException : En caso de que haya un error en la escritura.
      */
-    public void clearRegister(long position) throws IOException {
+    protected void clearRegister(long position) throws IOException {
         randomAccessFile.seek(position);
         for (int i = 0; i < registerLength;i++){
             randomAccessFile.writeByte(0);
@@ -63,18 +63,19 @@ public class FileController {
      * @param length : Longitud que se desea que tenga la cadena
      * @return String
      */
-    public String formatString(String s, int length){
+    protected String formatString(String s, int length){
         StringBuilder format = new StringBuilder(s.trim());
         while (format.length()<length)
             format.append(Character.MIN_VALUE);
         return format.substring(0,length);
     }
 
-    public int getRegLength() {
-        return registerLength;
-    }
-
-    public void setRegLength(int regLength) {
-        registerLength = regLength;
+    /**
+     * Devuelve el número de registros que se han insertado en el archivo
+     * @return Long : numero de registros
+     * @throws IOException : En caso de algún error en la lectura del archivo, o que no exista
+     */
+    public long registersCount() throws IOException {
+        return randomAccessFile.length() / registerLength;
     }
 }
