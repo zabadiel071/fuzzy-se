@@ -26,7 +26,7 @@ public class FusificationModelsDemo {
         labels.add(label1);
         labels.add(label2);
 
-        FuzzyVariable fuzzyVariable = new FuzzyVariable("Var1", labels);
+        FuzzyVariable fuzzyVariable = new FuzzyVariable((byte)1, "Var1", labels);
         System.out.println(fuzzyVariable);
     }
 }
