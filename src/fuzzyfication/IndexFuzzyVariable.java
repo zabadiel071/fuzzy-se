@@ -1,18 +1,27 @@
-package files;
+package fuzzyfication;
+
+import files.Constants;
+import files.FileController;
 
 /**
  * Representa un archivo indice
+ * Registro conformado por : [Id (Byte) | Position (Long)]
  */
-public class Index extends FileController{
+public class IndexFuzzyVariable extends FileController {
+
+    /**
+     * Singleton
+     */
+    private static final IndexFuzzyVariable INSTANCE = new IndexFuzzyVariable("data/variables_index");
 
     /**
      * Constructor por defecto
      * @param fileName : Nombre del archivo en la estructura de archivos
      */
-    public Index(String fileName) {
+    private IndexFuzzyVariable(String fileName) {
         super(fileName);
         // La suma de los bytes que ocupa la clave y los que ocupa una dirección lógica
-        registerLength = Constants.ID_LENGTH + Long.BYTES;
+        registerLength = Constants.VARIABLE_ID_LENGTH + Long.BYTES;
     }
 
     /**
@@ -21,12 +30,12 @@ public class Index extends FileController{
      * @param position: posicion en bytes del registro en el archivo maestro
      * @return boolean
      */
-    public boolean insertRegister(int key, long position){
+    public boolean insertRegister(byte key, long position){
         boolean insert = false;
-        if (position == -1 ){
+        if (getPosition(key) == -1 ){
             try {
                 randomAccessFile.seek(randomAccessFile.length());
-                randomAccessFile.writeInt(key);
+                randomAccessFile.writeByte(key);
                 randomAccessFile.writeLong(position);
                 randomAccessFile.seek(0);
                 insert = true;
@@ -42,13 +51,13 @@ public class Index extends FileController{
      * @param key : Clave del registro
      * @return long
      */
-    public long getPosition(int key){
+    public long getPosition(byte key){
         long position = -1;
         try {
             long nRegisters = randomAccessFile.length() / registerLength;
             for (int i = 0; i < nRegisters; i++){
                 randomAccessFile.seek(i*registerLength);
-                int foundKey = randomAccessFile.readInt();
+                byte foundKey = randomAccessFile.readByte();
                 if (foundKey == key)
                     position = randomAccessFile.readLong();
             }
@@ -63,12 +72,12 @@ public class Index extends FileController{
      * Elimina el registro en la llave ingresada
      * @param key : Llave de la cual se quiere borrar el registro
      */
-    public void delete(int key){
+    public void delete(byte key){
         try {
             long nRegisters = randomAccessFile.length() / registerLength;
             for (int i = 0; i< nRegisters ; i++){
                 randomAccessFile.seek(i*registerLength);
-                int foundKey = randomAccessFile.readInt();
+                byte foundKey = randomAccessFile.readByte();
                 if (foundKey == key)
                     clearRegister(randomAccessFile.getFilePointer());
             }
@@ -76,5 +85,13 @@ public class Index extends FileController{
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Singleton
+     * @return IndexFuzzyVariable Instance
+     */
+    public static IndexFuzzyVariable getINSTANCE() {
+        return INSTANCE;
     }
 }
