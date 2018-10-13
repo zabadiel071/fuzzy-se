@@ -8,12 +8,29 @@ import java.util.ArrayList;
 public class Label {
 
     /**
+     * Longitud máxima para el nombre de una etiqueta
+     */
+    public static final byte LABEL_NAME_LENGHT = 50;
+
+    /**
+     * Numero máximo de puntos que puede tener una etiqueta
+     */
+    public static final byte POINTS_COUNT = 5;
+
+    /**
+     * 50 caracteres y 5 puntos
+     */
+    static final int BYTES = LABEL_NAME_LENGHT * Character.BYTES + 5*Point.BYTES;
+
+    /**
      * Nombre de la etiqueta
+     * Máximo 50 caracteres
      */
     private String labelName;
 
     /**
      * Puntos que conforman la etiqueta
+     * Maximo se deben de tener 5
      */
     private ArrayList<Point> points;
 

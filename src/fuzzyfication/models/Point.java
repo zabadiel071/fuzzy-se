@@ -3,12 +3,18 @@ package fuzzyfication.models;
 public class Point {
 
     /**
+     * x -> byte, mu -> byte
+     */
+    static final int BYTES = 2 * Byte.BYTES;
+
+    /**
      * Valor en X del punto
      */
     private byte x;
 
     /**
      * Valor en MU (Nivel de memebresía)
+     * Está en tipo byte, pero en el cálculo debe hacerse el ajuste  (mu * 0.01) Para manejar el valor de 0 a 1
      */
     private byte mu;
 
