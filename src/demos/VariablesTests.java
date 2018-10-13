@@ -40,7 +40,7 @@ public class VariablesTests {
         // Inserción de las variables en el archivo maestro
         MasterVariables.getInstance().insert(fuzzyVariable);
         MasterVariables.getInstance().insert(fuzzyVariable2);
-
+        /*
         // Obtención de la variable 1 del archivo
         fuzzyVariable = MasterVariables.getInstance().get((byte)1);
         System.out.println(fuzzyVariable);
@@ -48,6 +48,9 @@ public class VariablesTests {
         // Obtención de la variable 2 del archivo
         fuzzyVariable2 = MasterVariables.getInstance().get((byte)2);
         System.out.println(fuzzyVariable2);
+        */
+
+        System.out.println(MasterVariables.getInstance().getAll());
     }
 
     public static void main(String[] args) {

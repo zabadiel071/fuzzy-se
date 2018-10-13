@@ -7,6 +7,7 @@ import fuzzyfication.models.Point;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * Accesos y operaciones sobre el archivo que almacena las variables difusas
@@ -73,18 +74,53 @@ public class MasterVariables extends FileController{
         long position = getPosition(id);        //Obtener su posición del archivo indice
         FuzzyVariable variable = null;
         if (position != -1){
-            variable = new FuzzyVariable();
             try {
                 randomAccessFile.seek(position);
+
+                variable = readVariable();
+/*                variable = new FuzzyVariable();
                 variable.setId(randomAccessFile.readByte());
                 variable.setName(readString(FuzzyVariable.NAME_LENGTH));
-
                 variable.setLabels(readLabels());
+             */
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
         return variable;
+    }
+
+    public ArrayList<FuzzyVariable> getAll(){
+        ArrayList<FuzzyVariable> variables = new ArrayList<>();
+        try {
+            long registers = registersCount();
+            FuzzyVariable fuzzyVariable;
+            for (int i = 0; i < registers; i++) {
+                randomAccessFile.seek(i*registerLength);
+                 fuzzyVariable = readVariable();
+                if (fuzzyVariable != null)
+                    variables.add(fuzzyVariable);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return variables;
+    }
+
+    /**
+     * Comienza la lectura de una variable en la posición en la que se encuentre el puntero del archivo
+     * @return FuzzyVariable : La variable recuperada
+     */
+    private FuzzyVariable readVariable() {
+        FuzzyVariable fuzzyVariable = new FuzzyVariable();
+        try {
+            fuzzyVariable.setId(randomAccessFile.readByte());
+            fuzzyVariable.setName(readString(FuzzyVariable.NAME_LENGTH));
+            fuzzyVariable.setLabels(readLabels());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return fuzzyVariable;
     }
 
     /**
@@ -124,6 +160,11 @@ public class MasterVariables extends FileController{
         return points;
     }
 
+    /**
+     * Lee una etiqueta en la posición actual
+     * @return Label : Etiqueta leida
+     * @throws IOException : En caso de algún error con los archivos
+     */
     private Label parseLabel() throws IOException {
 
         String label = readString(Label.LABEL_NAME_LENGHT);
@@ -191,7 +232,6 @@ public class MasterVariables extends FileController{
             }
         }
     }
-
 
     /**
      * Obtiene la posicion en bytes del id
