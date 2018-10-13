@@ -3,22 +3,26 @@ package files;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 
+/**
+ * Clase base para el manejo de archivos
+ */
 public class FileController {
-    /**
-     *
-     */
-    private RandomAccessFile randomAccessFile;
 
     /**
-     *
+     * Objeto para el acceso aleatorio al archivo
      */
-    private int registerLength;
+    RandomAccessFile randomAccessFile;
+
+    /**
+     * Longitud del registro
+     */
+    int registerLength;
 
     /**
      * Constructor por defecto
      * @param fileName : Nombre del archivo en la estructura de archivos
      */
-    public FileController(String fileName) {
+    FileController(String fileName) {
         try {
             randomAccessFile = new RandomAccessFile(fileName,"rw");
             randomAccessFile.setLength(0);
@@ -28,8 +32,8 @@ public class FileController {
     }
 
     /**
-     * Reads a string for the size specified
-     * @param length : expected length for the string
+     * Lee un String del tamaño que se especifique
+     * @param length : el tamaño que se espera que tenga el string
      * @return String
      */
     protected String readString(int length) throws IOException {
@@ -41,8 +45,8 @@ public class FileController {
     }
 
     /**
-     * Sets all data in row equals to 0
-     * @param position :
+     * Pone toda la información en el registro como 0
+     * @param position : posición del registro que se desea eliminar
      * @throws IOException : En caso de que haya un error en la escritura.
      */
     public void clearRegister(long position) throws IOException {
@@ -52,6 +56,13 @@ public class FileController {
         }
     }
 
+    /**
+     * Convierte un String en el formato que se requiere para su inserción en el archivo,
+     * debido a que se requiere longitud de tamaño fijo
+     * @param s : Cadena que se desea formatear
+     * @param length : Longitud que se desea que tenga la cadena
+     * @return String
+     */
     public String formatString(String s, int length){
         StringBuilder format = new StringBuilder(s.trim());
         while (format.length()<length)
