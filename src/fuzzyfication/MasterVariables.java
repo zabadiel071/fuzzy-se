@@ -90,6 +90,10 @@ public class MasterVariables extends FileController{
         return variable;
     }
 
+    /**
+     * Obtiene un ArrayList con todas las variables que existen en el archivo maestro
+     * @return ArrayList
+     */
     public ArrayList<FuzzyVariable> getAll(){
         ArrayList<FuzzyVariable> variables = new ArrayList<>();
         try {
