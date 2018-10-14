@@ -10,22 +10,40 @@ import java.util.ArrayList;
 public class Fuzzyficator {
 
     /**
+     * Realiza la fusificacion con todas las variables difusas que se encuentran en el archivo maestro
+     * @param values : Arraylist<Byte> del mismo tamaño que el numero de variables difusas, cada elemento en values
+     *               se compara con su correspondiente variable difusa
+     * @return ArrayList<FuzzyResult> : Contiene todos los resultados obtenidos para cada variable
+     */
+    public ArrayList<FuzzyResult> bulkFuzzyfication(ArrayList<Byte> values){
+        ArrayList<FuzzyVariable> variables = MasterVariables.getInstance().getAll();
+        ArrayList<FuzzyResult> results = new ArrayList<>();
+
+        if (values.size() == variables.size()){
+            for (int i = 0; i < variables.size() - 1; i++) {
+                results.add(fuzzyfy(values.get(i) , variables.get(i)));
+            }
+            return results;
+        }else {
+            return null;
+        }
+    }
+
+    /**
      * Obtiene la fusificación para un valor en x en una variable definida
      * @param x : Valor a fusificar
      * @param fuzzyVariable : Variable difusa
      * @return FuzzyResult : Resultado difuso
      */
-    public FuzzyResult fusify(byte x, FuzzyVariable fuzzyVariable){
+    public FuzzyResult fuzzyfy(byte x, FuzzyVariable fuzzyVariable){
         ArrayList<LabelResult> results = new ArrayList<>();
         for (Label l : fuzzyVariable.getLabels() ) {
             if (isLabelValuable(x,l.getRange())){
-                System.out.println("\n" + l);
-
+                //System.out.println("\n" + l);
                 ArrayList<Line> lines = l.getLines();
-
                 for (Line line : lines ) {
                     if (isLineValuable(x,line)){
-                        System.out.printf("%s Es valuable en %s , con Mu = %s%n", x, line, line.getMuValue(x));
+                        //System.out.printf("%s Es valuable en %s , con Mu = %s%n", x, line, line.getMuValue(x));
                         results.add(new LabelResult(l.getLabelName(), line.getMuValue(x)));
                         break;
                     }
