@@ -25,7 +25,8 @@ public class FileController {
     protected FileController(String fileName) {
         try {
             randomAccessFile = new RandomAccessFile(fileName,"rw");
-            randomAccessFile.setLength(0);
+            //Mantener la información permanente en el archivo
+            //randomAccessFile.setLength(0);
         } catch (Exception e) {
             e.printStackTrace();
         }

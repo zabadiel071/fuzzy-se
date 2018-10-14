@@ -7,7 +7,6 @@ import fuzzyfication.models.Point;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Map;
 
 /**
  * Accesos y operaciones sobre el archivo que almacena las variables difusas
