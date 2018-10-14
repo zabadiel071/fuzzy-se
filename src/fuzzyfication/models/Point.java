@@ -23,6 +23,10 @@ public class Point {
         this.mu = mu;
     }
 
+    float getNormalizedMu(){
+        return (float) (mu * 0.01);
+    }
+
     public byte getX() {
         return x;
     }

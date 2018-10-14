@@ -34,6 +34,39 @@ public class Label {
      */
     private ArrayList<Point> points;
 
+    /**
+     * Devuelve el rango de valores en los que se puede valuar para esta etiqueta
+     * @return LabelRange : Rango de valores
+     */
+    public LabelRange getRange(){
+        Point first = points.get(0);
+        Point last = points.get(points.size() - 1);
+        return new LabelRange(first.getX(), last.getX());
+    }
+
+    /**
+     *
+     * @return
+     */
+    public ArrayList<Line> getLines(){
+        ArrayList<Line> lines = new ArrayList<>();
+        if (points.size() >= 2){
+            try {
+                Point p1, p2;
+                for (int i = 0; i < points.size() - 1; i++) {
+                    p1 = points.get(i);
+                    p2 = points.get(i+1);
+                    lines.add(new Line(p1,p2));
+                }
+            }catch (IndexOutOfBoundsException ex){
+                return lines;
+            }
+        }else {
+            return null;
+        }
+        return lines;
+    }
+
     public Label(String labelName,ArrayList<Point> points) {
         this.labelName = labelName;
         this.points = points;
