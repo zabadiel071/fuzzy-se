@@ -8,7 +8,8 @@ import fuzzyfication.models.Point;
 import java.util.ArrayList;
 
 public class FusificationTests {
-    public static void main(String[] args) {
+
+    void basicFuzzyfication(){
         // Listas de ejemplo
         ArrayList<Point> pointsLabel1 = new ArrayList<>();
         ArrayList<Point> pointsLabel2 = new ArrayList<>();
@@ -38,5 +39,13 @@ public class FusificationTests {
 
         Fuzzyficator fuzzyficator = new Fuzzyficator();
         System.out.println("\n" + fuzzyficator.fusify((byte) 20, fuzzyVariable));
+    }
+
+    void completeFuzzification(){
+
+    }
+
+    public static void main(String[] args) {
+
     }
 }
