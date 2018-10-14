@@ -9,6 +9,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Clase para carga de los datos desde variables.json
+ * Es necesario añadir la libreria Gson
+ * Se pueden utilizar los archivos master_variables y variables_index que vienen por defecto en el repositorio
+ * en caso de que no se quiera instalar la libreria. 
+ *
+ * Comentar esta clase si está causando conflictos al compilar.
+ *
+ */
 public class VariableService {
 
     private static String readJsonFile(){
