@@ -43,8 +43,8 @@ public class FuzzyficationTests {
     }
 
     public static void main(String[] args) {
-        ArrayList values = new ArrayList(Arrays.asList(20,55,20));
+        FuzzyficationTests fuzzyficationTests = new FuzzyficationTests();
+        fuzzyficationTests.basicFuzzyfication();
 
-        System.out.println(values);
     }
 }
