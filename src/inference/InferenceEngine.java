@@ -55,7 +55,7 @@ public class InferenceEngine {
 
         Centroid centroid = new Centroid(linesResults);
         float centroidV = centroid.getCentroid();
-        System.out.println(centroidV);
+        System.out.println("El centroide corresponde a  :" + centroidV);
     }
 
     /**
