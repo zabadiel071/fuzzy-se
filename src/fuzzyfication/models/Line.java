@@ -55,4 +55,8 @@ public class Line {
                 ", p2=" + p2 +
                 '}';
     }
+
+    public float getMuValue(float x) {
+        return slope() * (x - p1.getX()) + p1.getNormalizedMu();
+    }
 }

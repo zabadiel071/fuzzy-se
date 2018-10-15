@@ -1,5 +1,6 @@
 package inference;
 
+import difuzzyfication.Centroid;
 import fuzzyfication.Fuzzyficator;
 import fuzzyfication.models.FuzzyResult;
 import fuzzyfication.models.LabelResult;
@@ -31,12 +32,13 @@ public class InferenceEngine {
     public InferenceResult alto, medio, bajo;
 
     public static void main(String[] args) {
-        byte [] values = new byte[]{40,65,30,67,23,30, 40, 50};
+        //byte [] values1 = new byte[]{40,65,30,67,23,30,40,50};
+        byte [] values2 = new byte[]{90,90,90,90,90,90,90,90};
 
         ArrayList<Byte> valuesList = new ArrayList<>();
 
-        for (int i = 0; i < values.length; i++) {
-            valuesList.add(values[i]);
+        for (int i = 0; i < values2.length; i++) {
+            valuesList.add(values2[i]);
         }
 
         Fuzzyficator fuzzyficator = new Fuzzyficator();
@@ -46,7 +48,14 @@ public class InferenceEngine {
         InferenceEngine inferenceEngine = new InferenceEngine();
         inferenceEngine.inference(l);
 
+        ArrayList<Float> linesResults = new ArrayList<>();
+        linesResults.add(inferenceEngine.bajo.getWeight());
+        linesResults.add(inferenceEngine.medio.getWeight());
+        linesResults.add(inferenceEngine.alto.getWeight());
 
+        Centroid centroid = new Centroid(linesResults);
+        float centroidV = centroid.getCentroid();
+        System.out.println(centroidV);
     }
 
     /**
