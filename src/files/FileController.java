@@ -42,7 +42,9 @@ public class FileController {
         for (int i = 0; i < length ; i++){
             result[i] = randomAccessFile.readChar();
         }
-        return String.valueOf(result);
+        String values = String.valueOf(result);
+        values.replaceAll("\u0000", " ");
+        return values.trim();
     }
 
     /**

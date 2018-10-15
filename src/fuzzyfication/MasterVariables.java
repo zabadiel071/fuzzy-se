@@ -58,8 +58,10 @@ public class MasterVariables extends FileController{
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }else
+        }else{
+            System.out.printf("El id %s ya existe en la base de conocimiento, no pudo ser agregado %n",fuzzyVariable.getId() );
             return false;
+        }
 
         return true;
     }
