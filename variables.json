@@ -1,0 +1,188 @@
+[
+  {
+    "id" : 1,
+    "name":"Solución de problemas",
+    "labels":[
+      {
+        "labelName" : "Bajo",
+        "points" :[
+          {"x" : 0 , "mu" : 0},
+          {"x" : 25, "mu" : 100},
+          {"x" : 60, "mu" : 100},
+          {"x" : 80, "mu" : 0}
+        ]
+      },
+      {
+        "labelName" : "Alto",
+        "points":[
+          {"x" : 70, "mu" : 0 },
+          {"x" : 90, "mu" : 100},
+          {"x" : 100, "mu" :100}
+        ]
+      }
+    ]
+  },
+
+  {
+    "id" : 2,
+    "name":"Trabajo en equipo",
+    "labels":[
+      {
+        "labelName" : "Bajo",
+        "points" :[
+          {"x" : 0 , "mu" : 0},
+          {"x" : 25, "mu" : 100},
+          {"x" : 60, "mu" : 100},
+          {"x" : 80, "mu" : 0}
+        ]
+      },
+      {
+        "labelName" : "Alto",
+        "points":[
+          {"x" : 70, "mu" : 0 },
+          {"x" : 90, "mu" : 100},
+          {"x" : 100, "mu" :100}
+        ]
+      }
+    ]
+  },
+
+  {
+    "id" : 3,
+    "name":"Capacidad de aplicar los conocimientos en la práctica",
+    "labels":[
+      {
+        "labelName" : "Incompleto",
+        "points" :[
+          { "x" : 0 , "mu" : 100},
+          { "x" : 70, "mu" : 100},
+          { "x" : 85 , "mu" : 0}
+        ]
+      },
+      {
+        "labelName" : "Completo",
+        "points": [
+          {"x" : 80, "mu" : 0},
+          {"x" : 90, "mu" : 100},
+          {"x" : 100 , "mu" : 100}
+        ]
+      }
+    ]
+  },
+
+  {
+    "id" : 4,
+    "name":"Habilidades de investigación",
+    "labels":[
+      {
+        "labelName" : "Malo",
+        "points" :[
+          { "x" : 0 , "mu" : 0 },
+          { "x" : 30 , "mu" : 100 },
+          { "x" : 50 , "mu" : 100 },
+          { "x" : 65 , "mu" : 0 }
+        ]
+      },
+      {
+        "labelName" : "Bueno",
+        "points" :[
+          { "x" : 60 , "mu" : 0 },
+          { "x" : 85 , "mu" : 100 },
+          { "x" : 100 , "mu" : 100 }
+        ]
+      }
+    ]
+  },
+
+  {
+    "id" : 5,
+    "name":"Habilidad para trabajar en forma autónoma",
+    "labels":[
+      {
+        "labelName" : "Insuficiente",
+        "points" :[
+          { "x" : 0 , "mu" : 100 },
+          { "x" : 65 , "mu" : 100 },
+          { "x" : 75 , "mu" : 0 }
+        ]
+      },
+      {
+        "labelName" : "Suficiente",
+        "points" :[
+          { "x" : 70 , "mu" : 0 },
+          { "x" : 85 , "mu" : 100 },
+          { "x" : 100 , "mu" : 100 }
+        ]
+      }
+    ]
+  },
+
+  {
+    "id" : 6,
+    "name":"Capacidad para diseñar y gestionar proyectos",
+    "labels":[
+      {
+        "labelName" : "Incongruente",
+        "points" :[
+          { "x" : 0 , "mu" : 100 },
+          { "x" : 70 , "mu" : 100 },
+          { "x" : 75 , "mu" : 0 }
+        ]
+      },
+      {
+        "labelName" : "Congruente",
+        "points" :[
+          { "x" : 70 , "mu" : 0 },
+          { "x" : 90 , "mu" : 100 },
+          { "x" : 100 , "mu" : 100 }
+        ]
+      }
+    ]
+  },
+
+  {
+    "id" : 7,
+    "name":"Búsqueda del logro",
+    "labels":[
+      {
+        "labelName" : "NoAlcanzada",
+        "points" :[
+          { "x" : 0 , "mu" : 100 },
+          { "x" : 75, "mu" : 0}
+        ]
+      },
+      {
+        "labelName" : "Alcanzada",
+        "points" :[
+          { "x" : 70 , "mu" : 100 },
+          { "x" : 100, "mu" : 100}
+        ]
+      }
+    ]
+  },
+
+  {
+    "id" : 8,
+    "name":"Capacidad de análisis y síntesis",
+    "labels":[
+      {
+        "labelName" : "Deficiente",
+        "points" :[
+          { "x" : 0 , "mu" : 0 },
+          { "x" : 40 , "mu" : 100 },
+          { "x" : 70 , "mu" : 100 },
+          { "x" : 75 , "mu" : 0 }
+        ]
+      },
+      {
+        "labelName" : "Buena",
+        "points" :[
+          { "x" : 70 , "mu" : 0 },
+          { "x" : 90 , "mu" : 100 },
+          { "x" : 100 , "mu" : 100 }
+        ]
+      }
+    ]
+  }
+
+]
