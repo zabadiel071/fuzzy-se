@@ -73,7 +73,15 @@ public class datos extends JFrame{
         Fuzzyficator fuzzyficator = new Fuzzyficator();
         ArrayList<FuzzyResult> l = fuzzyficator.bulkFuzzyfication(values);
         System.out.println(l);
-
+        JTextArea textArea = new JTextArea(10, 50);
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        textArea.setEditable(false);
+        String etiquetas="";
+        for (int i=0; i<l.size() ;i++ ) {
+            for(int j=0; j<l.get(i).getResults().size(); j++){ etiquetas=etiquetas+l.get(i).getResults().get(j).getLabelName() + ", m(x)= " + l.get(i).getResults().get(j).getMu()+" ";}
+            textArea.append("\n" + l.get(i).getVariableName() + ": " + etiquetas);
+            etiquetas="";
+        }
         InferenceEngine inferenceEngine = new InferenceEngine();
         inferenceEngine.inference(l);
 
@@ -82,12 +90,14 @@ public class datos extends JFrame{
                 inferenceEngine.medio.getWeight(),
                 inferenceEngine.alto.getWeight()
         };
-
-
+        textArea.append("\n"+inferenceEngine.getAlto().getFamEntry().getResult()+" weigth: "+inferenceEngine.getAlto().getWeight());
+        textArea.append("\n"+inferenceEngine.getMedio().getFamEntry().getResult()+" weigth: "+inferenceEngine.getMedio().getWeight());
+        textArea.append("\n"+inferenceEngine.getBajo().getFamEntry().getResult()+" weigth: "+inferenceEngine.getBajo().getWeight());
         Centroid centroid = new Centroid(results);
         float centroidV = centroid.getCentroid();
         System.out.println("El centroide es : " + centroidV);
-
+        textArea.append("\n Centroide: "+centroidV);
+        JOptionPane.showMessageDialog(null,scrollPane,"RESULTADOS",JOptionPane.INFORMATION_MESSAGE);
 
     }
     private void borrarTodo(){

@@ -52,7 +52,9 @@ public class InferenceEngine {
         System.out.println(medio);
         System.out.println(bajo);
     }
-
+    public InferenceResult getAlto(){ return alto;}
+    public InferenceResult getMedio(){return medio;}
+    public InferenceResult getBajo(){return bajo;}
     /**
      * Aplicación del máximo de los pesos de regla (weight) para cada lista de resultados inferidos
      * @param list : Lista con los resultados de la inferencia
