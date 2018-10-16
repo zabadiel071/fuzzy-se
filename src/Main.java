@@ -9,7 +9,7 @@ public class Main {
 
     public static void main(String[] args) {
         //byte [] values1 = new byte[]{40,65,30,67,23,30,40,50};
-        byte [] values2 = new byte[]{90,90,90,90,90,90,90,90};
+        byte [] values2 = new byte[]{70,65,55,39,40,25,70,73};
 
         ArrayList<Byte> valuesList = new ArrayList<>();
 
