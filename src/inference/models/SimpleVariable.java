@@ -1,5 +1,8 @@
 package inference.models;
 
+/**
+ * Variable compuesta por una etiqueta
+ */
 public class SimpleVariable {
 
     private byte variableId;

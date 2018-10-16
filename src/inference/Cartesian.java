@@ -1,6 +1,5 @@
 package inference;
 
-import fuzzyfication.MasterVariables;
 import fuzzyfication.models.FuzzyVariable;
 import fuzzyfication.models.Label;
 import inference.models.SimpleVariable;
@@ -9,10 +8,10 @@ import java.util.*;
 
 import static java.util.Collections.emptyList;
 
-
+/**
+ * Realiza las operaciones del producto cartesiano para datos genéricos
+ */
 public class Cartesian  {
-
-
 
     /**
      * Obtiene las combinaciones por etiqueta que tiene una variable

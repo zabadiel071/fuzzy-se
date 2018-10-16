@@ -9,10 +9,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class FamService {
-    static FamService INSTANCE = new FamService();
+/**
+ * Genera la matriz fam
+ */
+class FamService {
+    private static FamService INSTANCE = new FamService();
 
-    public void FillFile(){
+    /**
+     * Llena el archivo FAM
+     */
+    void FillFile(){
         List<FamEntry> entries = FamService.getINSTANCE().generateFAM();
         for (FamEntry entry : entries){
             MasterFam.getINSTANCE().insert(entry);
@@ -20,9 +26,11 @@ public class FamService {
     }
 
     /**
-     * Genera la matriz fam
+     * Devuelve la matriz fam, como una lista de entradas
+     *
+     * @return List<FamEntry> : Lista con las entradas de la matriz fam
      */
-    public List<FamEntry> generateFAM(){
+    private List<FamEntry> generateFAM(){
         List<FamEntry> result = new ArrayList<>();
 
         HashMap hashMap = getLabelDictionary();
@@ -50,6 +58,13 @@ public class FamService {
         return result;
     }
 
+    /**
+     * Calcula el resultado que tiene cada combinación de la matriz fam
+     * Utiliza un hashmap para obtener el valor de cada etiqueta, el hashmap se genera en getLabelDictionary
+     * @param hashMap : Arreglo {Clave,Valor} con el valor numérico asociado a cada etiqueta {"alto", "medio", "bajo", etc}
+     * @param list : Lista con las variables a medir
+     * @return String : Valor de la variable de salida que toma el la combinación deseada
+     */
     private String calculateResult(HashMap<String,Integer> hashMap, List<SimpleVariable> list) {
         int result = 0;
         for (SimpleVariable variable: list) {
@@ -60,14 +75,28 @@ public class FamService {
         else return "Bajo";
     }
 
+    /**
+     * Constructor
+     */
+    private FamService() {}
 
-    private FamService() {
-    }
-
-    public static FamService getINSTANCE() {
+    /**
+     * Unica Instancia que se utiliza en todo el código
+     * @return
+     */
+    static FamService getINSTANCE() {
         return INSTANCE;
     }
 
+    /**
+     * Arreglo que funciona como diccionario
+     * se genera un arreglo {"String", "entero"} en donde la clave es "String", y se asocia con un número
+     * consecutivo de acuerdo al orden en que fue declarada la variable de entrada.
+     * Por ejemplo  para la variable Solución de problemas, se generan los siguientes valores
+     * {"Bajo", 0} , {"Medio", 1 } , {"Alto", 2}
+     *
+     * @return
+     */
     private HashMap<String, Integer> getLabelDictionary(){
         HashMap<String, Integer> hashMap = new HashMap();
         ArrayList<FuzzyVariable> variables = MasterVariables.getInstance().getAll();
@@ -79,6 +108,10 @@ public class FamService {
         return hashMap;
     }
 
+    /**
+     * Devuelve el producto cartesiano de lals variables de entrada definidas
+     * @return ArrayList : Lista con el producto cartesiano
+     */
     private ArrayList<List<SimpleVariable>> getCartesian(){
         Cartesian cartesian = new Cartesian();
         ArrayList<FuzzyVariable> variables = MasterVariables.getInstance().getAll();
