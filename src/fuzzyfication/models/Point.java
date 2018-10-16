@@ -23,7 +23,7 @@ public class Point {
         this.mu = mu;
     }
 
-    float getNormalizedMu(){
+    public float getNormalizedMu(){
         return (float) (mu * 0.01);
     }
 
@@ -45,7 +45,7 @@ public class Point {
 
     @Override
     public String toString() {
-        return "Point{" +
+        return "FloatPoint{" +
                 "x=" + x +
                 ", mu=" + mu +
                 '}';

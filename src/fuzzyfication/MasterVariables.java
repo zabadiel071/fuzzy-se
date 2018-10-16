@@ -147,7 +147,7 @@ public class MasterVariables extends FileController{
     /**
      * Lee los puntos que se encuentran en la etiqueta actual, de la variable actual que se intenta leer.
      * No usar este método fuera del contexto de lectura de una etiqueta
-     * @return ArrayList<Point> : Con los puntos que pertenecen a la etiqueta
+     * @return ArrayList<FloatPoint> : Con los puntos que pertenecen a la etiqueta
      * @throws IOException : En caso de que haya un error en la lectura del archivo
      */
     private ArrayList<Point> readPoints() throws IOException {

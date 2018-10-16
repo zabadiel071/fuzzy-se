@@ -1,10 +1,7 @@
 package inference;
 
-import difuzzyfication.Centroid;
-import fuzzyfication.Fuzzyficator;
 import fuzzyfication.models.FuzzyResult;
 import fuzzyfication.models.LabelResult;
-import fuzzyfication.models.Line;
 import inference.models.FamEntry;
 import inference.models.InferenceResult;
 
@@ -17,70 +14,49 @@ import java.util.List;
  */
 public class InferenceEngine {
 
+    /**
+     * El motor de inferencia se inicializa llenando la matriz fam con la que se va a trabajar
+     */
     public InferenceEngine() {
         FamService.getINSTANCE().FillFile();
     }
 
     /**
-     *
+     * Conjuntos de resultados de los que se obtienen los máximos
      */
-    List<InferenceResult> altos,medios ,bajos;
+    private List<InferenceResult> altos,medios ,bajos;
 
     /**
-     *
+     * Conjunto de resultados máximos
      */
     public InferenceResult alto, medio, bajo;
 
-    public static void main(String[] args) {
-        //byte [] values1 = new byte[]{40,65,30,67,23,30,40,50};
-        byte [] values2 = new byte[]{90,90,90,90,90,90,90,90};
-
-        ArrayList<Byte> valuesList = new ArrayList<>();
-
-        for (int i = 0; i < values2.length; i++) {
-            valuesList.add(values2[i]);
-        }
-
-        Fuzzyficator fuzzyficator = new Fuzzyficator();
-        ArrayList<FuzzyResult> l = fuzzyficator.bulkFuzzyfication(valuesList);
-        System.out.println(l);
-
-        InferenceEngine inferenceEngine = new InferenceEngine();
-        inferenceEngine.inference(l);
-
-        ArrayList<Float> linesResults = new ArrayList<>();
-        linesResults.add(inferenceEngine.bajo.getWeight());
-        linesResults.add(inferenceEngine.medio.getWeight());
-        linesResults.add(inferenceEngine.alto.getWeight());
-
-        Centroid centroid = new Centroid(linesResults);
-        float centroidV = centroid.getCentroid();
-        System.out.println(centroidV);
-    }
-
     /**
-     *
-     * @param fuzzyResults
+     * Método principal para iniciar la inferencia por min- max
+     * @param fuzzyResults : Resultados difusos que se obtienen de la fusificación
      */
-    void inference(ArrayList<FuzzyResult> fuzzyResults){
+    public void inference(ArrayList<FuzzyResult> fuzzyResults){
 
-        List<InferenceResult> results = min(fuzzyResults);
+        List<InferenceResult> results = min(fuzzyResults);  //Se obtiene el minimo
 
+        //Se separan los valores en alto, medio, bajo
         splitRanges(results);
 
+        //Se aplica máximo para cada uno
         alto = max(altos);
         medio = max(medios);
         bajo = max (bajos);
 
+        //Salida de las reglas seleccionadas
         System.out.println(alto);
         System.out.println(medio);
         System.out.println(bajo);
     }
 
     /**
-     *
-     * @param list
-     * @return
+     * Aplicación del máximo de los pesos de regla (weight) para cada lista de resultados inferidos
+     * @param list : Lista con los resultados de la inferencia
+     * @return InferenceResult : Resultado máximo de la lista de valores
      */
     private InferenceResult max(List<InferenceResult> list) {
         float max = 0;
@@ -95,10 +71,10 @@ public class InferenceEngine {
     }
 
     /**
-     *
-     * @param results
+     * Separa los resultados en altos, medios, bajos
+     * @param results : conjunto de valors que contiene todas las combinaciones obtenidas
      */
-    void splitRanges(List<InferenceResult> results){
+    private void splitRanges(List<InferenceResult> results){
         altos = new ArrayList<>();
         medios = new ArrayList<>();
         bajos = new ArrayList<>();
@@ -115,9 +91,10 @@ public class InferenceEngine {
     }
 
     /**
-     *
-     * @param fuzzyResults
-     * @return
+     * Obtiene los valores minimos entre los resultados difusos encontrados, es decir , el mínimo para
+     * el conjunto con todas las variables lingüistica definidas.
+     * @param fuzzyResults : ArrayList con los resultados de cada variable lingüistica
+     * @return List<InferenceResult> : Lista con los mínimos obtenidos
      */
     private List<InferenceResult> min(ArrayList<FuzzyResult> fuzzyResults){
         List<FamEntry> entries = MasterFam.getINSTANCE().getAll();
@@ -139,9 +116,9 @@ public class InferenceEngine {
     }
 
     /**
-     *
-     * @param muResults
-     * @return
+     * Obtiene el peso de la regla, buscando el valor mínimo de los resultados de cada variable difusa
+     * @param muResults : Lista con los valores difusos
+     * @return float : Valor mínimo, que representa el peso de la regla
      */
     private float getWeight(List<Float> muResults) {
         float weigth = 1.0f;
@@ -154,10 +131,10 @@ public class InferenceEngine {
     }
 
     /**
-     *
-     * @param label
-     * @param fuzzyResult
-     * @return
+     * Obtiene la membresia para un resultado y una regla insertada
+     * @param label : Etiqueta a la que se pertenece
+     * @param fuzzyResult : Resultado difuso
+     * @return float : Nivel de membresia para el resultado difuso
      */
     private float calculateResult(String label, FuzzyResult fuzzyResult) {
         List<LabelResult> labelResults = fuzzyResult.getResults();

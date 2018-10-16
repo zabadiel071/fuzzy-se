@@ -34,6 +34,10 @@ public class Label {
      */
     private ArrayList<Point> points;
 
+    public Label() {
+
+    }
+
     /**
      * Devuelve el rango de valores en los que se puede valuar para esta etiqueta
      * @return LabelRange : Rango de valores

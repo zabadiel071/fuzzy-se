@@ -16,7 +16,7 @@ public class FuzzyficationTests {
         ArrayList<Point> pointsLabel2 = new ArrayList<>();
 
         // Inicialización con puntos de ejemplo
-        // se le pueden insertar los puntos que quiera, pero solo tomara en cuenta los que están establecidos en la clase Point
+        // se le pueden insertar los puntos que quiera, pero solo tomara en cuenta los que están establecidos en la clase FloatPoint
         for (byte i = 0; i < 4; i++){
             pointsLabel1.add(new Point( (byte) (i * 10), (byte)(8*i)));
             pointsLabel2.add(new Point( (byte) (i * 10), (byte)(3*i)));

@@ -15,7 +15,7 @@ public class VariablesTests {
         ArrayList<Point> pointsLabel2 = new ArrayList<>();
 
         // Inicialización con puntos de ejemplo
-        // se le pueden insertar los puntos que quiera, pero solo tomara en cuenta los que están establecidos en la clase Point
+        // se le pueden insertar los puntos que quiera, pero solo tomara en cuenta los que están establecidos en la clase FloatPoint
         for (byte i = 0; i < 10; i++){
             pointsLabel1.add(new Point( i, (byte)(8*i)));
             pointsLabel2.add(new Point( i, (byte)(3*i)));

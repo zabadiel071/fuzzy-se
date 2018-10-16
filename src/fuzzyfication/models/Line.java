@@ -32,6 +32,15 @@ public class Line {
         return slope() * (x - p1.getX()) + p1.getNormalizedMu();
     }
 
+    /**
+     *
+     * @param mu
+     * @return
+     */
+    public float getXEvaluation(float mu){
+        return ( ( mu - p1.getNormalizedMu() ) / slope() ) + p1.getX();
+    }
+
     public Point getP1() {
         return p1;
     }
