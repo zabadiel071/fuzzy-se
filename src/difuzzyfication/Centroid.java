@@ -44,17 +44,16 @@ public class Centroid {
         FuzzyVariable fuzzyVariable = Constants.OUTPUT_VARIABLE;
         ArrayList<Label> labels = fuzzyVariable.getLabels();
 
-        Iterator<Label> labelIterator = labels.iterator();
-        Label label = labelIterator.next();
-
         int indexCut = 0;
         float muVal = 0;
         float muAccumulator = 0;
 
         float muCalculated;
         float area = 0;
-
         float x = 0;
+
+        int indexLabel = 0;
+        Label label = labels.get(indexLabel);
         while (x<100) {
             if (isLabelValuable(x,label.getRange())){
                 for (Line l: label.getLines() ) {
@@ -65,20 +64,51 @@ public class Centroid {
                         else
                             muVal = muCuts[indexCut];
 
+                        //En caso de que el valor de la etiqueta siguiente sea mayor, es decir,
+                        // el nuevo corte haya sido más grande
+                        try {
+                            float nextMu = testNextLabel(x,labels.get(indexLabel+1), indexCut);
+                            if ( nextMu > muVal){
+                                indexLabel++;
+                                indexCut++;
+                                label = labels.get(indexLabel);
+                                break;
+                            }
+                        }catch (IndexOutOfBoundsException e){  }
+
                         area += muVal * x;
                         muAccumulator += muVal;
+                        x += 0.1;
                         break;
                     }
                 }
+
             }else {
-                label = labelIterator.next();
+                indexLabel++;
                 indexCut++;
+                label = labels.get(indexLabel);
             }
             //System.out.println(area);
-            x += 0.1;
         }
 
         return area / muAccumulator;
+    }
+
+    private float testNextLabel(float x, Label label, int indexCut) throws IndexOutOfBoundsException {
+        float muCalculated;
+        if (isLabelValuable(x, label.getRange())){
+            for (Line l : label.getLines()){
+                if (isLineValuable(x, l)){
+                    muCalculated = l.getMuValue(x);
+                    if (muCalculated < muCuts[indexCut + 1])
+                        return muCalculated;
+                    else
+                        return muCuts[indexCut + 1];
+
+                }
+            }
+        }
+            return -1;
     }
 
 
